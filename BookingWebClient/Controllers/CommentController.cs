@@ -49,6 +49,12 @@ namespace BookingWebClient.Controllers
             List<Comment> listComments = JsonSerializer.Deserialize<List<Comment>>(strDate, options);
             return View(listComments);
         }
+
+        public async Task<IActionResult> usercomment()
+        {
+            return View();
+        }
+
         public async Task<IActionResult> Index(string? id)
         {
             ViewBag.username = await getUser();
@@ -64,6 +70,11 @@ namespace BookingWebClient.Controllers
             return View(listCommets);
         }
 
+        public IActionResult Create()
+        {
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Idcomment,Rate,Description,Idacc")] Comment comment)
@@ -73,10 +84,10 @@ namespace BookingWebClient.Controllers
                 HttpResponseMessage response1 = await client.PostAsJsonAsync(CommentAPiUrl, comment);
                 response1.EnsureSuccessStatusCode();
 
-                return RedirectToAction("Create");
+                return RedirectToAction(nameof(Index));
             }
 
-            return View("Index");
+            return View(Index);
         }
 
         [HttpPost]
