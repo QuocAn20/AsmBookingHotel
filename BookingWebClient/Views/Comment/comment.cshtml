@@ -20,8 +20,8 @@
 
     <div class="container">
         <div class="navigation">
-             <ul>
- <li>
+            <ul>
+                <li>
                     <a asp-controller="Account" asp-action="admin">
                         <span class="icon">
                             <ion-icon name="person-circle-outline"></ion-icon>
@@ -38,7 +38,7 @@
                     </a>
                 </li>
                 <li>
-                    <a asp-controller="Account" asp-action="customers" >
+                    <a asp-controller="Account" asp-action="customers">
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
                         </span>
@@ -161,15 +161,76 @@
                             {
                                 <tr>
                                     <td>@item.Idcomment</td>
-                                    <td>@item.Rate</td>
+                                    <td>
+                                        @if (@item.Rate == 5)
+                                        {
+                                            <div class="start">
+                                                <img src="~/images/start_fill.png" asp-append-version="true" />
+                                                <img src="~/images/start_fill.png" asp-append-version="true" />
+                                                <img src="~/images/start_fill.png" asp-append-version="true" />
+                                                <img src="~/images/start_fill.png" asp-append-version="true" />
+                                                <img src="~/images/start_fill.png" asp-append-version="true" />
+                                            </div>
+                                        }
+                                        else if (@item.Rate == 4)
+                                        {
+                                            <div class="start">
+                                                <img src="~/images/start_fill.png" asp-append-version="true" />
+                                                <img src="~/images/start_fill.png" asp-append-version="true" />
+                                                <img src="~/images/start_fill.png" asp-append-version="true" />
+                                                <img src="~/images/start_fill.png" asp-append-version="true" />
+                                                <img src="~/images/start_empty.png" asp-append-version="true" />
+                                            </div>
+                                        }
+                                        else if (@item.Rate == 3)
+                                        {
+                                            <div class="start">
+                                                <img src="~/images/start_fill.png" asp-append-version="true" />
+                                                <img src="~/images/start_fill.png" asp-append-version="true" />
+                                                <img src="~/images/start_fill.png" asp-append-version="true" />
+                                                <img src="~/images/start_empty.png" asp-append-version="true" />
+                                                <img src="~/images/start_empty.png" asp-append-version="true" />
+                                            </div>
+                                        }
+                                        else if (@item.Rate == 2)
+                                        {
+                                            <div class="start">
+                                                <img src="~/images/start_fill.png" asp-append-version="true" />
+                                                <img src="~/images/start_fill.png" asp-append-version="true" />
+                                                <img src="~/images/start_empty.png" asp-append-version="true" />
+                                                <img src="~/images/start_empty.png" asp-append-version="true" />
+                                                <img src="~/images/start_empty.png" asp-append-version="true" />
+                                            </div>
+                                        }
+                                        else if (@item.Rate == 1)
+                                        {
+                                            <div class="start">
+                                                <img src="~/images/start_fill.png" asp-append-version="true" />
+                                                <img src="~/images/start_empty.png" asp-append-version="true" />
+                                                <img src="~/images/start_empty.png" asp-append-version="true" />
+                                                <img src="~/images/start_empty.png" asp-append-version="true" />
+                                                <img src="~/images/start_empty.png" asp-append-version="true" />
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="start">
+                                                <img src="~/images/start_empty.png" asp-append-version="true" />
+                                                <img src="~/images/start_empty.png" asp-append-version="true" />
+                                                <img src="~/images/start_empty.png" asp-append-version="true" />
+                                                <img src="~/images/start_empty.png" asp-append-version="true" />
+                                                <img src="~/images/start_empty.png" asp-append-version="true" />
+                                            </div>
+                                        }
+                                    </td>
                                     <td>@item.Description</td>
                                     <td>@item.Idacc</td>
                                     <td>
-                                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Idcomment">Delete</a>
+                                        <a class="btn btn-danger" asp-controller="Comment" asp-action="Delete" asp-route-id="@item.Idcomment">Delete</a>
                                     </td>
                                     <td>
 
-                                        <a class="btn btn-danger" asp-controller="Comment" asp-action="EditComment" asp-route-id="@item.Idcomment">Update</a>
+                                        <a class="btn btn-danger" asp-controller="Comment" asp-action="Edit" asp-route-id="@item.Idcomment">Update</a>
                                     </td>
                                 </tr>
                             }
@@ -185,6 +246,15 @@
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <style>
+        .start img {
+            display: inline-block;
+            border: 0;
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+        }
+    </style>
     <script>
         let toggle = document.querySelector('.toggle');
         let navigation = document.querySelector('.navigation');

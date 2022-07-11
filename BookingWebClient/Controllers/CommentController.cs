@@ -50,11 +50,6 @@ namespace BookingWebClient.Controllers
             return View(listComments);
         }
 
-        public async Task<IActionResult> usercomment()
-        {
-            return View();
-        }
-
         public async Task<IActionResult> Index(string? id)
         {
             ViewBag.username = await getUser();
