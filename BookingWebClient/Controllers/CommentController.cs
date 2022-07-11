@@ -40,8 +40,7 @@ namespace BookingWebClient.Controllers
         }
         public async Task<IActionResult> comment()
         {
-            var idcmt = HttpContext.Session.GetString("Idcomment");
-            HttpResponseMessage response = await client.GetAsync(CommentAPiUrl + "/id?id=" + idcmt);
+            HttpResponseMessage response = await client.GetAsync(CommentAPiUrl);
             string strDate = await response.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions
             {
@@ -74,7 +73,7 @@ namespace BookingWebClient.Controllers
                 HttpResponseMessage response1 = await client.PostAsJsonAsync(CommentAPiUrl, comment);
                 response1.EnsureSuccessStatusCode();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Create");
             }
 
             return View("Index");
