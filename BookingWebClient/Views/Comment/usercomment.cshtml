@@ -158,7 +158,7 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <div id="#theImage" class="rating">
+                                    <div class="rating">
                                         <img src="~/images/start_empty.png" alt="1" />
                                         <img src="~/images/start_empty.png" alt="2" />
                                         <img src="~/images/start_empty.png" alt="3" />
@@ -166,8 +166,8 @@
                                         <img src="~/images/start_empty.png" alt="5" />
                                     </div>
                                 </td>
-                                <td><asp:TextBox ID="txtDescription" runat="server" Height="44px" TextMode="MultiLine" Width="185px"></asp:TextBox></td>
-                                <td><asp:TextBox ID="txtUser" runat="server" Width="185px"></asp:TextBox></td>
+                                <td><input type="text" placeholder="Enter Your Comment ..." /></td>
+                                <td><input class="form-input" id="contact-first-name" type="text" name="name" value="Customer"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -195,11 +195,6 @@
             cursor:pointer;
         }
 
-        #theImage {
-            width:20px;
-            height:20px;
-            background:url("~/images/start_fill.png") no-repeat;
-        }
     </style>
     <script>
         let toggle = document.querySelector('.toggle');
