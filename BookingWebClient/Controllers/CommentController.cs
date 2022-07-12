@@ -54,13 +54,13 @@ namespace BookingWebClient.Controllers
         {
             ViewBag.username = await getUser();
 
-            HttpResponseMessage response = await client.GetAsync(CommentAPiUrl+ "/idacc?idacc=" + id);
+            HttpResponseMessage response = await client.GetAsync(CommentAPiUrl + "/idacc?idacc=" + id);
             string strDate = await response.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true,
             };
-            List<Comment> listCommets = JsonSerializer.Deserialize<List<Comment>> (strDate, options);
+            List<Comment> listCommets = JsonSerializer.Deserialize<List<Comment>>(strDate, options);
 
             return View(listCommets);
         }
@@ -76,17 +76,17 @@ namespace BookingWebClient.Controllers
         {
             ViewBag.username = await getUser();
             comment.Idcomment = "";
-              comment.Idacc = "A0001";
-                HttpResponseMessage response = await client.PostAsJsonAsync(CommentAPiUrl, comment);
+            comment.Idacc = "A0001";
+            HttpResponseMessage response = await client.PostAsJsonAsync(CommentAPiUrl, comment);
             response.EnsureSuccessStatusCode();
 
             string strDate = await response.Content.ReadAsStringAsync();
-                var options = new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true,
-                };
-                return RedirectToAction("Index", "Room");
-           
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+            };
+            return RedirectToAction("Index", "Room");
+
         }
 
         [HttpPost]
@@ -117,7 +117,7 @@ namespace BookingWebClient.Controllers
             return View("Index");
         }
 
-        
+
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
