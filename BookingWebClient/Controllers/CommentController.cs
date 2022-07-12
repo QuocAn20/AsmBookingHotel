@@ -75,27 +75,18 @@ namespace BookingWebClient.Controllers
         public async Task<IActionResult> Create([Bind("Idcomment,Rate,Description,Idacc")] Comment comment)
         {
             ViewBag.username = await getUser();
+            comment.Idcomment = "";
+              comment.Idacc = "A0001";
+                HttpResponseMessage response = await client.PostAsJsonAsync(CommentAPiUrl, comment);
+            response.EnsureSuccessStatusCode();
 
-            if (ModelState.IsValid)
-            {
-                
-                HttpResponseMessage response1 = await client.PostAsJsonAsync(CommentAPiUrl, comment);
-                response1.EnsureSuccessStatusCode();
-
-                HttpResponseMessage response = await client.GetAsync(
-                    CommentAPiUrl + "/" + comment.Idcomment + "/" + comment.Rate + "/" + comment.Description + "/" + comment.Idacc);
-                string strDate = await response.Content.ReadAsStringAsync();
+            string strDate = await response.Content.ReadAsStringAsync();
                 var options = new JsonSerializerOptions
                 {
                     PropertyNameCaseInsensitive = true,
                 };
-                comment = JsonSerializer.Deserialize<Comment>(strDate, options);
-
-                HttpContext.Session.SetString("Idcomment", comment.Idcomment);
-
                 return RedirectToAction("Index", "Room");
-            }
-            return RedirectToAction("Login", "Account");
+           
         }
 
         [HttpPost]
