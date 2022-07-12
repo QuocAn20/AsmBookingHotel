@@ -1,43 +1,221 @@
-﻿@model DataAccess.Models.Comment
-
-@{
+﻿@{
     Layout = "";
 }
+@model DataAccess.Models.Comment
 
-<h1>Comment</h1>
+<!DOCTYPE html>
 
-<h4>My Comment</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Idcomment" class="control-label"></label>
-                <input asp-for="Idcomment" class="form-control" />
-                <span asp-validation-for="Idcomment" class="text-danger"></span>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script type="module" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></script>
+
+
+</head>
+
+
+<body>
+
+    <div class="card">
+        <div class="row">
+            <div class="col-2">
+                <img src="~/images/user.jpg">
             </div>
-            <div class="form-group">
-                <label asp-for="Rate" class="control-label"></label>
-                <input asp-for="Rate" class="form-control" />
-                <span asp-validation-for="Rate" class="text-danger"></span>
+            <div class="col-10">
+                <div class="comment-box ml-2">
+                    <h4>Add a comment</h4>
+                    <div class="rating">
+                        <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label>
+                        <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label>
+                        <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label>
+                        <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label>
+                        <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
+                    </div>
+                    <div class="comment-area">
+                        <textarea class="form-control" placeholder="what is your view?" rows="4"></textarea>
+                    </div>
+                    <div class="comment-btns mt-2">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="pull-left">
+                                    <a class="btn" asp-controller="Room" asp-action="Index">Cancel</a>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="pull-right">
+                                    <button type="submit" class="btn btn-success send btn-sm">Comment<i class="fa fa-long-arrow-right ml-1"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Idacc" class="control-label"></label>
-                <select asp-for="Idacc" class ="form-control" asp-items="@ViewBag.Idacc"></select>
-            </div>
-            <div class="form-group">
-                <button class="submit" type="submit">Comment</button>
-            </div>
-        </form>
+        </div>
     </div>
-</div>
+
+    </div>
+
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <style>
+        html,
+        body {
+            height: 100%
+        }
+
+        body {
+            display: grid;
+            place-items: center;
+            font-family: 'Manrope', sans-serif;
+            background: red;
+        }
+
+        .card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            padding: 20px;
+            width: 800px;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            border-radius: 6px;
+            -moz-box-shadow: 0px 0px 5px 0px rgba(212, 182, 212, 1)
+        }
+
+        .comment-box {
+            padding: 5px;
+        }
+
+        .comment-area textarea {
+            resize: none;
+            border: 1px solid #ad9f9f;
+        }
+
+        .form-control:focus {
+            color: #495057;
+            background-color: #fff;
+            border-color: #ffffff;
+            outline: 0;
+            box-shadow: 0 0 0 1px rgb(255, 0, 0) !important;
+        }
+
+        .send {
+            color: #fff;
+            background-color: #ff0000;
+            border-color: #ff0000;
+        }
+
+            .send:hover {
+                color: #fff;
+                background-color: #f50202;
+                border-color: #f50202;
+            }
+
+
+        .rating {
+            display: flex;
+            margin-top: -10px;
+            flex-direction: row-reverse;
+            margin-left: -4px;
+            float: left;
+        }
+
+            .rating > input {
+                display: none
+            }
+
+            .rating > label {
+                position: relative;
+                width: 19px;
+                font-size: 25px;
+                color: #ff0000;
+                cursor: pointer;
+            }
+
+                .rating > label::before {
+                    content: "\2605";
+                    position: absolute;
+                    opacity: 0
+                }
+
+                .rating > label:hover:before,
+                .rating > label:hover ~ label:before {
+                    opacity: 1 !important
+                }
+
+            .rating > input:checked ~ label:before {
+                opacity: 1
+            }
+
+            .rating:hover > input:checked ~ label:before {
+                opacity: 0.4
+            }
+    </style>
+    <script>
+        let toggle = document.querySelector('.toggle');
+        let navigation = document.querySelector('.navigation');
+        let main = document.querySelector('.main');
+
+        toggle.onclick = function () {
+            navigation.classList.toggle('active');
+            main.classList.toggle('active');
+        }
+
+        let list = document.querySelectorAll('.navigation li');
+        function activeLink() {
+            list.forEach((item) =>
+                item.classList.remove('hoverd'));
+            this.classList.add('hoverd');
+
+        }
+        list.forEach((item) =>
+            item.addEventListener('mouseover', activeLink));
+    </script>
+
+</body>
+
+</html>
+@*<div class="row">
+    <div class="col-md-4">
+    <form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <h2>Sign Up</h2>
+    <label>
+    <span>Idcomment</span>
+    <input type="text" asp-for="Idcomment">
+    <span asp-validation-for="Idcomment" class="text-danger"></span>
+    </label>
+    <label>
+    <span>Rate</span>
+    <input type="email" asp-for="Rate">
+    <span asp-validation-for="Rate" class="text-danger"></span>
+    </label>
+    <label>
+    <span>Comment</span>
+    <input type="phone" asp-for="Description">
+    <span asp-validation-for="Description" class="text-danger"></span>
+    </label>
+    <label>
+    <span>User</span>
+    <input type="password" asp-for="Idacc">
+    <span asp-validation-for="Idacc" class="text-danger">@ViewBag.username.FullName</span>
+    </label>
+
+    <button class="submit" type="submit">Comment</button>
+    </form>
+    </div>
+    </div>*@
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
 }

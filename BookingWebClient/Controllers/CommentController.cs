@@ -74,15 +74,28 @@ namespace BookingWebClient.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Idcomment,Rate,Description,Idacc")] Comment comment)
         {
+            ViewBag.username = await getUser();
+
             if (ModelState.IsValid)
             {
+                
                 HttpResponseMessage response1 = await client.PostAsJsonAsync(CommentAPiUrl, comment);
                 response1.EnsureSuccessStatusCode();
 
-                return RedirectToAction(nameof(Index));
-            }
+                HttpResponseMessage response = await client.GetAsync(
+                    CommentAPiUrl + "/" + comment.Idcomment + "/" + comment.Rate + "/" + comment.Description + "/" + comment.Idacc);
+                string strDate = await response.Content.ReadAsStringAsync();
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true,
+                };
+                comment = JsonSerializer.Deserialize<Comment>(strDate, options);
 
-            return View(Index);
+                HttpContext.Session.SetString("Idcomment", comment.Idcomment);
+
+                return RedirectToAction("Index", "Room");
+            }
+            return RedirectToAction("Login", "Account");
         }
 
         [HttpPost]
