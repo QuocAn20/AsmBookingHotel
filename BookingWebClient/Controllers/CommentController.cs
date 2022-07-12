@@ -76,7 +76,6 @@ namespace BookingWebClient.Controllers
         {
             ViewBag.username = await getUser();
             comment.Idcomment = "";
-            comment.Idacc = "A0001";
             HttpResponseMessage response = await client.PostAsJsonAsync(CommentAPiUrl, comment);
             response.EnsureSuccessStatusCode();
 
