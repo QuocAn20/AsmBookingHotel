@@ -1,7 +1,10 @@
 ﻿@{
     Layout = "";
 }
-@model IEnumerable<DataAccess.Models.Comment>
+@model DataAccess.Models.Comment
+@{
+    IEnumerable<DataAccess.Models.Comment> Model = ViewData["comment"] as IEnumerable<DataAccess.Models.Comment>;
+}
 <!-- icon list-->
 <!DOCTYPE html>
 <html class="wide wow-animation" lang="en">
@@ -149,7 +152,6 @@
                                         </li>
                                     }
 
-
                                 </ul>
                             </div>
                         </div>
@@ -176,7 +178,7 @@
                                     <span class="round"><img src="~/images/User1.png" alt="user" width="50"></span>
                                 </div>
                                 <div class="comment-text w-100">
-                                    <h5>@item.IdaccNavigation.FullName</h5>
+                                    <h5></h5>
                                     <div class="comment-footer">
                                       
                                         @if (item.Rate == 5)
@@ -239,15 +241,14 @@
                                     </div>
                                 </div>
                                 <div class="bg-light p-2">
-                                      <form asp-action="PostComment">
+                                      <form asp-action="Create" method="post">
                                     <div class="d-flex flex-row align-items-start">
                                         <img class="rounded-circle" src="~/images/User1.png" width="40">
-                                        <textarea class="form-control ml-1 shadow-none textarea" name="comment"></textarea>
+                                        <textarea asp-for="Description" class="form-control ml-1 shadow-none textarea"></textarea>
                                     </div>
                                     <div class="mt-2 text-right">
                                         <button class="btn btn-primary btn-sm shadow-none" type="submit" >
-                                            Post
-                                            comment
+                                            Post comment
                                         </button>              
                                     </div>
                                     </form>

@@ -65,10 +65,19 @@ namespace BookingWebClient.Controllers
             return View(listCommets);
         }
 
-        //public IActionResult Create()
-        //{
-        //    return View();
-        //}
+        public async Task<IActionResult> Create()
+        {
+            HttpResponseMessage response = await client.GetAsync(CommentAPiUrl);
+            string strDate = await response.Content.ReadAsStringAsync();
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+            };
+            List<Comment> listComments = JsonSerializer.Deserialize<List<Comment>>(strDate, options);
+            ViewData["comment"] = listComments;
+            return View();
+
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -76,22 +85,20 @@ namespace BookingWebClient.Controllers
         {
             ViewBag.username = await getUser();
             comment.Idacc = HttpContext.Session.GetString("IdUser");
-            if (comment.Idacc != null)
-            {                
-                comment.Idcomment = "";
-                HttpResponseMessage response = await client.PostAsJsonAsync(CommentAPiUrl, comment);
-                response.EnsureSuccessStatusCode();
 
-                string strDate = await response.Content.ReadAsStringAsync();
-                var options = new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true,
-                };
-                List<Comment> listComments = JsonSerializer.Deserialize<List<Comment>>(strDate, options);
-                return View(listComments);
-            }
-            
-            return RedirectToAction("Index", "Room");
+            comment.Idcomment = "";
+            HttpResponseMessage response = await client.PostAsJsonAsync(CommentAPiUrl, comment);
+            response.EnsureSuccessStatusCode();
+
+            string strDate = await response.Content.ReadAsStringAsync();
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+            };
+            //List<Comment> listComments = JsonSerializer.Deserialize<List<Comment>>(strDate, options);
+            return RedirectToAction("Create", "Comment");
+
+            //return RedirectToAction("Index", "Room");
 
         }
 
