@@ -65,10 +65,10 @@ namespace BookingWebClient.Controllers
             return View(listCommets);
         }
 
-        public IActionResult Create()
-        {
-            return View();
-        }
+        //public IActionResult Create()
+        //{
+        //    return View();
+        //}
 
         [HttpPost]
         [ValidateAntiForgeryToken]
