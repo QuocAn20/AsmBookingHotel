@@ -85,20 +85,21 @@ namespace BookingWebClient.Controllers
         {
             ViewBag.username = await getUser();
             comment.Idacc = HttpContext.Session.GetString("IdUser");
-
-            comment.Idcomment = "";
-            HttpResponseMessage response = await client.PostAsJsonAsync(CommentAPiUrl, comment);
-            response.EnsureSuccessStatusCode();
-
-            string strDate = await response.Content.ReadAsStringAsync();
-            var options = new JsonSerializerOptions
+            if (comment.Idacc != null)
             {
-                PropertyNameCaseInsensitive = true,
-            };
-            //List<Comment> listComments = JsonSerializer.Deserialize<List<Comment>>(strDate, options);
-            return RedirectToAction("Create", "Comment");
+                comment.Idcomment = "";
+                HttpResponseMessage response = await client.PostAsJsonAsync(CommentAPiUrl, comment);
+                response.EnsureSuccessStatusCode();
 
-            //return RedirectToAction("Index", "Room");
+                string strDate = await response.Content.ReadAsStringAsync();
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true,
+                };
+                return RedirectToAction("Create", "Comment");
+            }           
+
+            return RedirectToAction("Index", "Room");
 
         }
 
