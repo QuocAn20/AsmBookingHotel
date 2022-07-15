@@ -187,17 +187,18 @@
                         <div class="comment-widgets m-b-20">
                             @foreach (var item in Model)
                             {
+                                <br/>
                                 <div class="d-flex flex-row comment-row">
                                     <div class="p-2">
                                         <span class="round"><img src="~/images/user.jpg" alt="user" width="50"></span>
                                     </div>
                                     <div class="comment-text w-100">
-                                        <h5>@item.IdaccNavigation.FullName</h5>
+                                        <h5 style="text-size-adjust">@item.IdaccNavigation.FullName</h5>
                                         <div class="comment-footer">
 
                                             @if (@item.Rate == 5)
                                             {
-                                                <div class="start"> Rate: 
+                                                <div class="start"> 
                                                     <img src="~/images/start_fill.png" asp-append-version="true" />
                                                     <img src="~/images/start_fill.png" asp-append-version="true" />
                                                     <img src="~/images/start_fill.png" asp-append-version="true" />
@@ -207,7 +208,7 @@
                                             }
                                             else if (@item.Rate == 4)
                                             {
-                                                <div class="start"> Rate: 
+                                                <div class="start">
                                                     <img src="~/images/start_fill.png" asp-append-version="true" />
                                                     <img src="~/images/start_fill.png" asp-append-version="true" />
                                                     <img src="~/images/start_fill.png" asp-append-version="true" />
@@ -217,7 +218,7 @@
                                             }
                                             else if (@item.Rate == 3)
                                             {
-                                                <div class="start"> Rate: 
+                                                <div class="start">
                                                     <img src="~/images/start_fill.png" asp-append-version="true" />
                                                     <img src="~/images/start_fill.png" asp-append-version="true" />
                                                     <img src="~/images/start_fill.png" asp-append-version="true" />
@@ -227,7 +228,7 @@
                                             }
                                             else if (@item.Rate == 2)
                                             {
-                                                <div class="start"> Rate: 
+                                                <div class="start">
                                                     <img src="~/images/start_fill.png" asp-append-version="true" />
                                                     <img src="~/images/start_fill.png" asp-append-version="true" />
                                                     <img src="~/images/start_empty.png" asp-append-version="true" />
@@ -237,7 +238,7 @@
                                             }
                                             else if (@item.Rate == 1)
                                             {
-                                                <div class="start"> Rate: 
+                                                <div class="start">
                                                     <img src="~/images/start_fill.png" asp-append-version="true" />
                                                     <img src="~/images/start_empty.png" asp-append-version="true" />
                                                     <img src="~/images/start_empty.png" asp-append-version="true" />
@@ -247,7 +248,7 @@
                                             }
                                             else
                                             {
-                                                <div class="start"> Rate: 
+                                                <div class="start">
                                                     <img src="~/images/start_empty.png" asp-append-version="true" />
                                                     <img src="~/images/start_empty.png" asp-append-version="true" />
                                                     <img src="~/images/start_empty.png" asp-append-version="true" />
@@ -259,7 +260,7 @@
                                         <p class="m-b-5 m-t-10">@item.Description</p>
                                     </div>
                                 </div>
-                                <div class="container mt-6">
+                                @*<div class="container mt-6">
                                     <div class="d-flex justify-content-center row">
                                         <div class="col-md-8">
                                             <div class="d-flex flex-column comment-section">
@@ -284,7 +285,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>*@
                             }
                         </div>
                     </div>
