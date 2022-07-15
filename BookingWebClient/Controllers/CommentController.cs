@@ -67,6 +67,7 @@ namespace BookingWebClient.Controllers
 
         public async Task<IActionResult> Create()
         {
+            ViewBag.username = await getUser();
             HttpResponseMessage response = await client.GetAsync(CommentAPiUrl);
             string strDate = await response.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions

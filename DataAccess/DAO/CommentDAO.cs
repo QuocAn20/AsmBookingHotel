@@ -16,6 +16,10 @@ namespace DataAccess.DAO
             using (var context = new ASMBOOKINGContext())
             {
                 list = context.Comments.ToList();
+                foreach (var a in list)
+                {
+                    a.IdaccNavigation = AccountDAO.FindAccountById(a.Idacc);
+                }
             }
 
             return list;
